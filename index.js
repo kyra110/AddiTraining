@@ -1,32 +1,35 @@
-// Fonction pour générer une addition aléatoire avec des nombres de 1 à 10
-function genererAddition() {
-  var num1 = Math.floor(Math.random() * 10) + 1;
-  var num2 = Math.floor(Math.random() * 10) + 1;
-  var resultatAttendu = num1 + num2;
-  return { num1: num1, num2: num2, resultatAttendu: resultatAttendu };
+// Générer un nombre aléatoire entre min et max
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Fonction pour vérifier la réponse
-function verifierReponse(addition, reponse) {
-  return addition.resultatAttendu === parseInt(reponse);
+// Mettre à jour le contenu des cartes avec des chiffres aléatoires
+function updateCards() {
+  document.getElementById("card1").innerText = getRandomNumber(1, 11);
+  document.getElementById("card2").innerText = getRandomNumber(1, 11);
+  document.getElementById("card3").innerText = getRandomNumber(1, 11);
 }
 
-// Fonction principale pour exécuter le programme
-function entrainementAdditions() {
-  var addition = genererAddition();
-  var reponse = prompt("Combien font " + addition.num1 + " + " + addition.num2 + " ?");
+// Vérifier la somme des chiffres
+function checkSum() {
+  var num1 = parseInt(document.getElementById("card1").innerText);
+  var num2 = parseInt(document.getElementById("card2").innerText);
+  var num3 = parseInt(document.getElementById("card3").innerText);
+  var sumInput = parseInt(document.getElementById("sumInput").value);
+  var sum = num1 + num2 + num3;
   
-  if (verifierReponse(addition, reponse)) {
-      alert("Bravo ! La réponse est correcte.");
+  if (sumInput === sum) {
+    document.getElementById("result").innerText = "Bravo ! La somme est correcte.";
   } else {
-      alert("Dommage. La réponse correcte est " + addition.resultatAttendu);
+    document.getElementById("result").innerText = "Désolé, la somme correcte est " + sum + ".";
   }
   
-  var continuer = confirm("Voulez-vous continuer l'entraînement ?");
-  if (continuer) {
-      entrainementAdditions();
-  }
+  // Mettre à jour les cartes pour un nouveau jeu
+  updateCards();
 }
 
-// Appel de la fonction principale pour commencer l'entraînement
-entrainementAdditions();
+// Initialiser les cartes au chargement de la page
+window.onload = function() {
+  updateCards();
+}
+
