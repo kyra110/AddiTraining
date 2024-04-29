@@ -8,6 +8,23 @@ function updateCards() {
   document.getElementById("card1").innerText = getRandomNumber(1, 11);
   document.getElementById("card2").innerText = getRandomNumber(1, 11);
   document.getElementById("card3").innerText = getRandomNumber(1, 11);
+  
+  // Déclencher le compte à rebours après la génération des chiffres
+  startCountdown();
+}
+
+// Compte à rebours de 4 secondes
+function startCountdown() {
+  var count = 4;
+  var countdown = setInterval(function() {
+    count--;
+    if (count === 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerText = "";
+    } else {
+      document.getElementById("countdown").innerText = "Compte à rebours : " + count + " secondes";
+    }
+  }, 1000);
 }
 
 // Vérifier la somme des chiffres
