@@ -57,3 +57,11 @@ function checkSum() {
 window.onload = function () {
   updateCards();
 };
+// Vérifier la somme des chiffres lorsque la touche Entrée est pressée
+document.getElementById("sumInput").addEventListener("keyup", function(event) {
+  // Vérifie si la touche pressée est "Entrée" (code 13)
+  if (event.keyCode === 13) {
+    // Appelle la fonction checkSum()
+    checkSum();
+  }
+});
